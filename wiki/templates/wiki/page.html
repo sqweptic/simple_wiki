@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<title>Страница {% if page %} {{ page.title }} {% endif %}</title>
+		<meta name="description" content="">
+	</head>
+	<body>
+		<div>
+			{% include "to_home_page.html" %}
+			{% if parent %}<a href="{% url 'page' parent.url %}">Родительская страница</a>{% endif%}
+			<a href="{% url 'edit' page.url %}">Редактировать</a>:
+			<a href="{% url 'add' page.url %}">Добавить</a>:
+			<a href="{% url 'delete' page.url %}">Удалить</a>
+		</div>
+		<div style='border: 1px solid black;  width: 550px; padding-left: 5px;'>
+		{% if page %}
+			<h1 style="border-bottom: 1px groove gray;">{{page.title}} ({{ page.url }})</h1>
+			{% autoescape off %}<p>{{ page.text }}</p> {% endautoescape %}
+		{% endif %}
+		</div>
+		{% if children %}
+			<h5>Дочерние страницы:</h5>
+			<ul>
+				{% for page in children %}
+					<li>
+						<a href="{% url 'page' page.url %}">{{ page.title }}</a>
+					</li>
+				{% endfor %}
+			</ul>
+		{% else %}
+			<h5>нет дочерних страниц</h5>
+		{% endif %}
+	</body>
+</html>

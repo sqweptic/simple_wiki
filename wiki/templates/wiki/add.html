@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<title>Добавить страницу</title>
+		<meta name="description" content="">
+	</head>
+
+	<body>
+		{% include "to_home_page.html" %}
+		<p> {% if exist %} <li>Страница уже существует</li> {% endif %}
+			<form action="" method="post">{% csrf_token %}
+				{{ form.as_p }}
+				<input type="submit" value="Добавить" />
+			</form>
+			
+		</p>
+	</body>
+</html>
